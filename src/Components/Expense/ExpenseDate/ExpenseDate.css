@@ -1,0 +1,35 @@
+
+.expense-date{
+  background-color: #6e6e6e;
+  padding: .15rem;
+  border-radius: .25rem;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  max-width: 208.5px;
+  color: #e6e6e6;
+}
+.expense-date-month{
+  font-size: 1rem;
+}
+.expense-date-day{
+  font-size: 2rem;
+}
+.expense-date-year{
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 810px){
+  .expense-date{
+    max-width: 112px;
+  }
+  .expense-date-month{
+    font-size: 1.15rem;
+  }
+  .expense-date-day{
+    font-size: 2rem;
+  }
+  .expense-date-year{
+    font-size: 1.15rem;
+  }
+}

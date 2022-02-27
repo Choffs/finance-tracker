@@ -1,0 +1,8 @@
+.edit-expense-control{
+  margin: .5rem 0;
+}
+.edit-expense-control .input-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

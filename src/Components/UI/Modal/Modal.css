@@ -1,0 +1,45 @@
+.modal-container{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.modal-close-box{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #222a;
+  z-index: 98;
+}
+.modal{
+  position: relative;
+  min-width: 250px;
+  min-height: 250px;
+  background-color: white;
+  border-radius: 1.15rem;
+  padding: 1.5rem;
+  z-index: 99;
+}
+.modal-header{
+  display: flex;
+}
+.modal-header-title{
+  margin: 0;
+  flex: 3;
+}
+.modal-header-close{
+  position: absolute;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  padding: 1.15rem;
+  right: 1rem;
+  top: .15rem;
+}

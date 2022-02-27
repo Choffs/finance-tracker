@@ -1,0 +1,46 @@
+:root{
+  --expense-list-icon-margin: .50rem;
+}
+
+.expense-toolbar{
+  display: flex;
+  margin-top: .50rem;
+  padding: 1.5rem .55rem;
+  justify-content: space-around;
+}
+.expense-toolbar-search{
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+.expense-toolbar-icon-wrapper{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+.expense-toolbar-icon{
+  font-size: 64px;
+
+}
+#icon-add-expense{
+  padding-left: 2rem;
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  transform: translateX(-.55rem);
+  background-color: #6e6e6e;
+
+
+}
+#icon-filter-list{
+  margin-right: var(--expense-list-icon-margin);
+}
+
+@media screen and (max-width: 600px){
+  .expense-toolbar-search{
+    justify-content: flex-end;
+  }
+}

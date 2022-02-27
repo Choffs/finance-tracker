@@ -1,0 +1,14 @@
+.expense-list{
+}
+
+.expense-list-empty{
+  height: 50vh;
+  color: white;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.expense-list-item-wrapper{
+  margin: 1rem 0;
+}

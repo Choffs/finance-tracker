@@ -1,0 +1,15 @@
+.expense{
+  background-color: #383838;
+}
+
+@media screen and (max-width: 812px){
+  .expense{
+    width: 100%;
+  }
+}
+@media screen and (min-width: 813px) {
+  .expense{
+    width: 75%;
+    max-width: 900px;
+  }
+}
