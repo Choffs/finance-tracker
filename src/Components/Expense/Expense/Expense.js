@@ -34,6 +34,7 @@ const Expense = (props)=>{
   const [filterOptions, setFilterOptions] = useState(BuildFilterList(FAKELIST,listBase));
   const [relevantFilters, setRelevantFilters] = useState(FilterRelevent(filterOptions));
   const [appliedFilters, setAppliedFilters] = useState(null);
+  const [searchText, setSearchText] = useState('');
 
   const createExpenseItem = (item)=>{
     if(typeof item === 'object'){
@@ -69,21 +70,26 @@ const Expense = (props)=>{
   }, [filterOptions]);
 
   useEffect(() => {
+    refreshFilterList();
   },[relevantFilters]);
 
   useEffect(()=>{
+    refreshFilterList();
+  }, [appliedFilters,searchText]);
+
+  const refreshFilterList = ()=>{
     if(appliedFilters){
     let tmpList = [...expenses];
     tmpList = tmpList.filter(item=>{
       let filterFlag = false;
         filterFlag = appliedFilters.Years[String(item.dateBought.getFullYear())] &&
-        appliedFilters.Months[item.dateBought.toLocaleString('en-US', {month: 'long'})];
+        appliedFilters.Months[item.dateBought.toLocaleString('en-US', {month: 'long'})] &&
+        item.itemName.toLowerCase().includes(searchText.toLowerCase());
       return filterFlag;
     })
     setFilteredList(tmpList);
     }
-  }, [appliedFilters]);
-
+  }
   const openModal = (data,title)=>{
     props.openModal(data,title);
   }
@@ -98,6 +104,7 @@ const Expense = (props)=>{
         filters={relevantFilters}
         setFilters={setAppliedFilters}
         appliedFilters={appliedFilters}
+        setSearchText={setSearchText}
          />
     <ExpenseList
       list={filteredList}

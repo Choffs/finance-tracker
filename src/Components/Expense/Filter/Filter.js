@@ -16,10 +16,12 @@ const Filter = (props)=>{
   const loseFocus = ()=>{
     setFilterClass('filter-search');
   }
-  const onSearch = (event)=>{
-  }
+
   const toggleDropDown = ()=>{
     setShowDropdown(!showDropDown);
+  }
+  const onSearch = (text)=>{
+    props.setSearchText(text);
   }
   const getDropdown = ()=>{
     return (showDropDown) ? <DropDown filters={props.filters} setFilters={props.setFilters} appliedFilters={props.appliedFilters} toggleMenu={toggleDropDown}/> : null;
@@ -28,6 +30,7 @@ const Filter = (props)=>{
     <div className={filterClass}>
       <div onFocus={onFocus} onBlur={loseFocus} className='filter-search-wrapper'>
         <Text
+        onTextChange={onSearch}
         placeholder='Search...'
         />
       </div>

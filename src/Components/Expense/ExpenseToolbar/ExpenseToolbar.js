@@ -27,7 +27,7 @@ return (
         <span className='material-icons expense-toolbar-icon' >add_circle</span>
       </div>
       <div  className='expense-toolbar-search'>
-        <Filter filters={props.filters} setFilters={props.setFilters} appliedFilters={props.appliedFilters} />
+        <Filter filters={props.filters} setFilters={props.setFilters} appliedFilters={props.appliedFilters} setSearchText={props.setSearchText} />
       </div>
   </div>
   )
