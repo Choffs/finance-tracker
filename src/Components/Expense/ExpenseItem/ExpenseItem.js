@@ -17,7 +17,7 @@ const ExpenseItem = (props)=>{
       onConfirm={deleteItem}
       onCancel={props.closeModal}
       />)
-        props.openModal(confirm);
+        props.openModal(confirm, 'Delete Menu');
   }
   const deleteItem = ()=>{
     props.closeModal();
@@ -28,13 +28,6 @@ const ExpenseItem = (props)=>{
     props.editItem(item)
   }
 
-  const GetCost = ()=>{
-    if (cost > 0){
-
-    } else if (cost < 0){
-
-    }
-  }
 return (
   <div
     className='expense-item-container'>
@@ -46,7 +39,7 @@ return (
       >
     <div className='expense-item-name'><h2>{item.itemName}</h2></div>
     <div className='expense-item-location'>Location Purchased</div>
-    <div className='expense-item-cost'><h2>{'($' + String(cost) +')'}</h2></div>
+    <div className='expense-item-cost'><h2>{`$${cost}`}</h2></div>
   </div>
   <div className={(showEdit) ? 'expense-item-edit show-edit': 'expense-item-edit'}>
     <div className='expense-item-edit-container'>

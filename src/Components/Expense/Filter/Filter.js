@@ -7,30 +7,25 @@ import './Filter.css';
 
 
 const Filter = (props)=>{
-  const filterOptions = props.filterOptions;
   const [filterClass, setFilterClass] = useState('filter-search');
   const [showDropDown, setShowDropdown] = useState(false);
-  const onFocus = (id)=>{
-    setFilterClass('filter-search filter-search-focused');
-  }
-  const loseFocus = ()=>{
-    setFilterClass('filter-search');
-  }
 
-  const toggleDropDown = ()=>{
-    setShowDropdown(!showDropDown);
-  }
-  const onSearch = (text)=>{
-    props.setSearchText(text);
-  }
-  const getDropdown = ()=>{
-    return (showDropDown) ? <DropDown filters={props.filters} setFilters={props.setFilters} appliedFilters={props.appliedFilters} toggleMenu={toggleDropDown}/> : null;
-  }
+  const onFocus = ()=>setFilterClass('filter-search filter-search-focused');
+
+  const loseFocus = ()=>setFilterClass('filter-search');
+
+  const toggleDropDown = ()=>setShowDropdown(!showDropDown);
+  
+
+  const getDropdown = ()=>(showDropDown) ? <DropDown filters={props.filters} setFilters={props.setFilters} appliedFilters={props.appliedFilters} toggleMenu={toggleDropDown}/> : null;
+
   return (
     <div className={filterClass}>
-      <div onFocus={onFocus} onBlur={loseFocus} className='filter-search-wrapper'>
+      <div className='filter-search-wrapper'>
         <Text
-        onTextChange={onSearch}
+        onFocus={onFocus}
+        onBlur={loseFocus}
+        onTextChange={props.setSearchText}
         placeholder='Search...'
         />
       </div>

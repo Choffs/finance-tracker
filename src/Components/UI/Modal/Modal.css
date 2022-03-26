@@ -29,17 +29,14 @@
 }
 .modal-header{
   display: flex;
+  gap: 2rem;
 }
 .modal-header-title{
   margin: 0;
   flex: 3;
 }
 .modal-header-close{
-  position: absolute;
   font-weight: bold;
   user-select: none;
   cursor: pointer;
-  padding: 1.15rem;
-  right: 1rem;
-  top: .15rem;
 }

@@ -14,6 +14,7 @@ export const BuildListBase = (fromYear=1900,toYear=2022)=>{
   return templateList;
 }
 
+
 const BuildFilterList = (expenses, filterList)=>{
 
   //Connvert to JSON string and back to deep copy array.
@@ -32,12 +33,12 @@ export const FilterRelevent = (filterList)=>{
   const yearKeys = Object.keys(years);
   const monthKeys = Object.keys(months);
   for(let year of yearKeys){
-    if(years[year].length == 0){
+    if(years[year].length === 0){
       delete years[year];
     }
   }
   for(let month of monthKeys){
-    if(months[month].length == 0){
+    if(months[month].length === 0){
       delete months[month];
     }
   }

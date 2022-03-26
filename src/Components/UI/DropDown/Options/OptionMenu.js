@@ -33,7 +33,7 @@ const OptionMenu = (props) =>{
    },[optionsSelected])
 
  const GetMenuOpen = ()=>{
-   return (props.menuOpen.menu == props.text) ?
+   return (props.menuOpen.menu === props.text) ?
    <SideDropDown options={props.options} selected={optionsSelected} setOption={setOption}/>:
      null;
  }

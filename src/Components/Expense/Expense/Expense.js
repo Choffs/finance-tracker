@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import ExpenseList from '../ExpenseList/ExpenseList';
 import ExpenseToolbar from '../ExpenseToolbar/ExpenseToolbar';
 import BuildFilterList, {BuildListBase, FilterRelevent} from './FilterList';
@@ -26,28 +26,29 @@ const FAKELIST = [
     dateBought: new Date('June 15, 2022 10:38:22')
   }
 ]
+const listBase = BuildListBase();
 
 const Expense = (props)=>{
   const [expenses, setExpenses] = useState(FAKELIST);
-  const [filteredList, setFilteredList] = useState(expenses);
-  const [listBase, setListBase] = useState(BuildListBase())
-  const [filterOptions, setFilterOptions] = useState(BuildFilterList(FAKELIST,listBase));
-  const [relevantFilters, setRelevantFilters] = useState(FilterRelevent(filterOptions));
+
   const [appliedFilters, setAppliedFilters] = useState(null);
   const [searchText, setSearchText] = useState('');
 
+  const filterOptions = useMemo(()=>BuildFilterList(expenses,listBase),[expenses]);
+  const relevantFilters = useMemo(()=>FilterRelevent(filterOptions),[filterOptions]);
+
+
   const createExpenseItem = (item)=>{
     if(typeof item === 'object'){
-      if(item.itemName.length  != 0 && item.itemCost != 0){
+      if(item.itemName.length  !== 0 && item.itemCost !== 0){
         setExpenses((prevState)=>{return [item, ...prevState]});
       }
     }
-    closeModal();
+    props.closeModal();
   }
 
   const deleteExpenseItem = (id)=>{
-    const tmpList = expenses.filter((item)=>{return item.id != id});
-    setExpenses(tmpList);
+    setExpenses(expenses.filter((item)=>{return item.id !== id}));
   }
 
   const editExpenseItem = (item)=>{
@@ -58,49 +59,28 @@ const Expense = (props)=>{
         break;
       }
     }
+    props.closeModal();
     setExpenses(expensesCpy);
   }
 
-  useEffect(() => {
-    setFilterOptions(BuildFilterList(expenses,listBase));
-  },[expenses]);
+  const filteredList = useMemo(()=>{
 
-  useEffect(() => {
-    setRelevantFilters(FilterRelevent(filterOptions));
-  }, [filterOptions]);
-
-  useEffect(() => {
-    refreshFilterList();
-  },[relevantFilters]);
-
-  useEffect(()=>{
-    refreshFilterList();
-  }, [appliedFilters,searchText]);
-
-  const refreshFilterList = ()=>{
-    if(appliedFilters){
-    let tmpList = [...expenses];
-    tmpList = tmpList.filter(item=>{
-      let filterFlag = false;
-        filterFlag = appliedFilters.Years[String(item.dateBought.getFullYear())] &&
-        appliedFilters.Months[item.dateBought.toLocaleString('en-US', {month: 'long'})] &&
-        item.itemName.toLowerCase().includes(searchText.toLowerCase());
-      return filterFlag;
+    return expenses.filter(item=>{
+      let itemInFilter = true;
+        if(appliedFilters){
+          itemInFilter = appliedFilters.Years[String(item.dateBought.getFullYear())] &&
+          appliedFilters.Months[item.dateBought.toLocaleString('en-US', {month: 'long'})]
+        }
+        if(searchText.length > 0) return itemInFilter && item.itemName.toLowerCase().includes(searchText.toLowerCase());
+        return itemInFilter;
     })
-    setFilteredList(tmpList);
-    }
-  }
-  const openModal = (data,title)=>{
-    props.openModal(data,title);
-  }
-  const closeModal = ()=>{
-    props.closeModal();
-  }
+  }, [appliedFilters, expenses, searchText]);
+
   return (
     <div className='expense'>
       <ExpenseToolbar createExpense={createExpenseItem}
-        openModal={openModal}
-        closeModal={closeModal}
+        openModal={props.openModal}
+        closeModal={props.closeModal}
         filters={relevantFilters}
         setFilters={setAppliedFilters}
         appliedFilters={appliedFilters}
@@ -108,11 +88,10 @@ const Expense = (props)=>{
          />
     <ExpenseList
       list={filteredList}
-      openModal={openModal}
-      closeModal={closeModal}
+      openModal={props.openModal}
+      closeModal={props.closeModal}
       deleteItem={deleteExpenseItem}
       editItem={editExpenseItem}
-
       />
     </div>
 )

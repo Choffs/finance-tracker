@@ -4,10 +4,9 @@ import GenID from '../../../../Functions/UID';
 
 const Text = (props)=>{
   const id = GenID(16);
+
   let text = props.defaultValue;
-  const onFocus = ()=>{
-    props.onFocus(id);
-  }
+
   const onInputChange = (event)=>{
     text = event.target.value;
     if(typeof props.onTextChange === 'function'){
@@ -21,6 +20,7 @@ const Text = (props)=>{
         className='ui-input txt-basic'
         onChange={onInputChange}
         onFocus={props.onFocus}
+        onBlur={props.onBlur}
         type='text'
         placeholder={props.placeholder}
       />

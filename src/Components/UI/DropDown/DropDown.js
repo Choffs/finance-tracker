@@ -5,7 +5,7 @@ import './DropDown.css';
 
 const DropDown = (props)=>{
 
-  const [optionMenuOpen, setOptionMenuOpen] = useState({menu: null})
+  const [optionMenuOpen, setOptionMenuOpen] = useState({menu: null});
   const [currentOptions, setCurrentOptions] = useState((props.appliedFilters != null) ? props.appliedFilters : {'Years': {}, "Months" : {}});
 
 
@@ -19,13 +19,13 @@ const DropDown = (props)=>{
 
   useEffect(()=>{
     props.setFilters(currentOptions);
-  },[currentOptions])
+  },[currentOptions, props])
 
   const months = Object.keys(props.filters[1]);
   const years = Object.keys(props.filters[0]);
 
   const ToggleMenu = (name)=>{
-    if(optionMenuOpen.menu == name){
+    if(optionMenuOpen.menu === name){
       setOptionMenuOpen({menu: null});
       return false;
     }else {

@@ -7,20 +7,8 @@ import './ExpenseToolbar.css';
 
 const ExpenseToolbar = (props)=>{
 
-
-  const openModal = (data)=>{
-    props.openModal(data);
-  }
-  const closeModal = ()=>{
-    props.closeModal();
-  }
-
-  const openAddExpense = ()=>{
-    const addExpenseElem = (
-      <AddExpense createExpense={props.createExpense} />
-    )
-    openModal(addExpenseElem);
-  }
+  const openAddExpense = ()=>props.openModal(<AddExpense createExpense={props.createExpense}/>, 'Add Item');
+  
 return (
     <div className='expense-toolbar'>
       <div id='icon-add-expense' className='expense-toolbar-icon-wrapper'onClick={openAddExpense}>

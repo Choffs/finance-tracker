@@ -10,7 +10,7 @@ const EditExpense=(props)=>{
   const defaultItem = props.item;
   let itemName = props.item.itemName;
   let itemCost = props.item.itemCost;
-  let dateBought = props.item.dateBought.toISOString().split('T')[0]
+  let dateBought = props.item.dateBought.toISOString().split('T')[0];
   const onNumberChange = (cost)=>{
     itemCost = cost;
   }
@@ -27,7 +27,7 @@ const EditExpense=(props)=>{
         id: props.item.id,
         itemName: itemName,
         itemCost: itemCost,
-        dateBought: new Date(dateBought.replace(/-/g,'\/'))
+        dateBought: new Date(dateBought.replace(/-/g,'/'))
       }
       props.onConfirm(item);
     }
